@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.liu.robot.dao.MessageDao">
+
+	<resultMap type="Message" id="MessageResult">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="command" jdbcType="VARCHAR" property="command" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+		<result column="description" jdbcType="VARCHAR" property="description" />
+	</resultMap>
+
+	<select id="queryMessageList"  resultMap="MessageResult">
+		SELECT id,command,description,content from message WHERE 1 = 1
+		<if test="command != null and command !='' ">
+		and command = #{command}
+		</if>
+		<if test="description != null and description !='' ">
+		and description like '%' #{description} '%'
+		</if>
+	</select>
+
+</mapper>
